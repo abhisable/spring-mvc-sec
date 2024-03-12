@@ -3,3 +3,4 @@ com/springmvcsec/config/MySecurityInitializer.class
 com/springmvcsec/config/WebAppInitializer.class
 com/springmvcsec/config/AppConfig.class
 com/springmvcsec/controller/HelloWorldController.class
+com/springmvcsec/controller/LoginController.class
