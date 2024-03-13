@@ -27,13 +27,13 @@ public class SecurityAppConfig {
 	public UserDetailsManager getUserDetails(DataSource dataSource) {
 		UserDetails userDetails1=User
 				.withUsername("Ashwini")
-				.password("{noop}Ashwini")
+				.password("{bcrypt}$2a$10$bIOQcqqwAsyZ09qNMQ3Pq.1kNfx90cGvYlQZxjoVt2j9TJMo/1y/.")//ashwini123
 				.roles("admin","user")
 				.build();
 		
 		UserDetails userDetails2=User
 				.withUsername("Prasanna")
-				.password("{noop}Prasanna")
+				.password("{bcrypt}$2a$10$abAYQ.NpTk9q/Y/A/JkrzO8U8VigiIUNfcZunmLYq3UDbk3tAuHPy")//prasanna123
 				.roles("user")
 				.build();
 		
