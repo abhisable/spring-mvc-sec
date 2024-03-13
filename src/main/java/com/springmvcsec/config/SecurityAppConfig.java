@@ -1,5 +1,7 @@
 package com.springmvcsec.config;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +10,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -22,22 +24,27 @@ public class SecurityAppConfig {
 	
 	
 	@Bean
-	public UserDetailsManager getUserDetails() {
+	public UserDetailsManager getUserDetails(DataSource dataSource) {
 		UserDetails userDetails1=User
-				.withUsername("abhishek")
-				.password("{noop}abhishek")
+				.withUsername("Ashwini")
+				.password("{noop}Ashwini")
 				.roles("admin","user")
 				.build();
 		
 		UserDetails userDetails2=User
-				.withUsername("rahul")
-				.password("{noop}rahul")
+				.withUsername("Prasanna")
+				.password("{noop}Prasanna")
 				.roles("user")
 				.build();
 		
-		return new InMemoryUserDetailsManager(userDetails1,userDetails2);
+		JdbcUserDetailsManager jdbcUserDetailsManager=new JdbcUserDetailsManager();
+		jdbcUserDetailsManager.setDataSource(dataSource);
+		jdbcUserDetailsManager.createUser(userDetails1);
+		jdbcUserDetailsManager.createUser(userDetails2);
+		return jdbcUserDetailsManager;
 		
 	}
+	
 	@Bean
 	public SecurityFilterChain settingUpSecurityFilterChain() throws Exception {
 		
@@ -52,7 +59,6 @@ public class SecurityAppConfig {
 					AntPathRequestMatcher.antMatcher("/WEB-INF/view/*"))
 			.permitAll();
 			
-
 		});
 		
 		httpSecurity.formLogin(formLoginCustomizer->{
