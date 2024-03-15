@@ -34,5 +34,10 @@ public class HelloWorldController {
 	public String coder() {
 		return "coder";
 	}
+	
+	@GetMapping("/accessDenied")
+	public String accessDenied() {
+		return "access-denied";
+	}
 
 }

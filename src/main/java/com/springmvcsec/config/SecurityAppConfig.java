@@ -40,8 +40,8 @@ public class SecurityAppConfig {
 
 		httpSecurity.authorizeHttpRequests(customizer -> {
 			customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/WEB-INF/view/*"),
-					AntPathRequestMatcher.antMatcher("/signup"),
-					AntPathRequestMatcher.antMatcher("/singup-processing")).permitAll();
+					AntPathRequestMatcher.antMatcher("/signup"), AntPathRequestMatcher.antMatcher("/singup-processing"))
+					.permitAll();
 			customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/coder")).hasAuthority("Coder");
 			customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/trainer")).hasAuthority("Trainer");
 			customizer.anyRequest().authenticated();
@@ -52,8 +52,13 @@ public class SecurityAppConfig {
 			formLoginCustomizer.loginPage("/myCustomLogin").permitAll();
 		});
 		httpSecurity.httpBasic(Customizer.withDefaults());
+
 		httpSecurity.logout(logoutCustomizer -> {
 			logoutCustomizer.logoutSuccessUrl("/myCustomLogin");
+		});
+
+		httpSecurity.exceptionHandling(customizer -> {
+			customizer.accessDeniedPage("/accessDenied");
 		});
 
 		return httpSecurity.build();
