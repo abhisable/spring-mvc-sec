@@ -101,22 +101,22 @@
 			<version>3.0.1</version>
 		</dependency>
 
-	</dependencies>
-	<build>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>6.1.5</version>
+		</dependency>
 
+	</dependencies>
+
+	<build>
 		<finalName>spring-mvc-sec</finalName>
 		<plugins>
 			<plugin>
-				<!--
-				https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
-
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.3.1</version>
-
-
 			</plugin>
-
 		</plugins>
 	</build>
 </project>
