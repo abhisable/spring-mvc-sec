@@ -22,53 +22,39 @@ public class SecurityAppConfig {
 
 	@Autowired
 	HttpSecurity httpSecurity;
-	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
-	
-	
+
 	@Bean
 	public UserDetailsManager getUserDetails(DataSource dataSource) {
 
-//		UserDetails userDetail=User
-//				.withUsername("ramu")
-//				.password(passwordEncoder.encode("ramu"))
-//				.roles("user")
-//				.build();
-//		
-		JdbcUserDetailsManager jdbcUserDetailsManager=new JdbcUserDetailsManager();
+		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
 		jdbcUserDetailsManager.setDataSource(dataSource);
-//		jdbcUserDetailsManager.createUser(userDetail);
 		return jdbcUserDetailsManager;
-		
+
 	}
-	
+
 	@Bean
 	public SecurityFilterChain settingUpSecurityFilterChain() throws Exception {
-		
 
-		httpSecurity.authorizeHttpRequests(customizer->{
-			customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/hello"),
-					AntPathRequestMatcher.antMatcher("/helloworld"))
-			.authenticated();
-			
-			customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/bye"),
-					AntPathRequestMatcher.antMatcher("/myCustomLogin"),
-					AntPathRequestMatcher.antMatcher("/WEB-INF/view/*"),
+		httpSecurity.authorizeHttpRequests(customizer -> {
+			customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/WEB-INF/view/*"),
 					AntPathRequestMatcher.antMatcher("/signup"),
-					AntPathRequestMatcher.antMatcher("/signup-processing"))
-			.permitAll();
-			
+					AntPathRequestMatcher.antMatcher("/singup-processing")).permitAll();
+			customizer.anyRequest().authenticated();
+
 		});
-		
-		httpSecurity.formLogin(formLoginCustomizer->{
-		formLoginCustomizer.loginPage("/myCustomLogin").permitAll();
-	});
+
+		httpSecurity.formLogin(formLoginCustomizer -> {
+			formLoginCustomizer.loginPage("/myCustomLogin").permitAll();
+		});
 		httpSecurity.httpBasic(Customizer.withDefaults());
-		
+		httpSecurity.logout(logoutCustomizer -> {
+			logoutCustomizer.logoutSuccessUrl("/myCustomLogin");
+		});
+
 		return httpSecurity.build();
 	}
-	
-	
-	
+
 }
