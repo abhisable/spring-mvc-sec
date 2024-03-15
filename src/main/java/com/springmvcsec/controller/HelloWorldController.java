@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HelloWorldController {
 	
-	@GetMapping("/helloworld")
+	@GetMapping("/homepage")
 	public String helloWorld() {
-		return "hello-world";
+		return "home-page";
 		
 	}
 	
@@ -23,6 +23,16 @@ public class HelloWorldController {
 	@GetMapping("/bye")
 	public String bye() {
 		return "bye bye ji";
+	}
+	
+	@GetMapping("/trainer")
+	public String trainer() {
+		return "trainer";
+	}
+	
+	@GetMapping("/coder")
+	public String coder() {
+		return "coder";
 	}
 
 }

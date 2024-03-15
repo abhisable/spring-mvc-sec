@@ -42,6 +42,8 @@ public class SecurityAppConfig {
 			customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/WEB-INF/view/*"),
 					AntPathRequestMatcher.antMatcher("/signup"),
 					AntPathRequestMatcher.antMatcher("/singup-processing")).permitAll();
+			customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/coder")).hasAuthority("Coder");
+			customizer.requestMatchers(AntPathRequestMatcher.antMatcher("/trainer")).hasAuthority("Trainer");
 			customizer.anyRequest().authenticated();
 
 		});
