@@ -10,7 +10,7 @@
         <a href="/spring-mvc-sec/coder">go to coder page</a>
        </sec:authorize>
         <br>
-        <sec:authorize access="hasAuthority('Trainer')">
+        <sec:authorize access="hasAuthority('RTrainer')">
         <a href="/spring-mvc-sec/trainer">got to trainer page</a>
         </sec:authorize>
         <br/>

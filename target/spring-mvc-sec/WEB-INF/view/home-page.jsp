@@ -6,11 +6,11 @@
 <html>
     <title>hello-world page</title>
     <body>
-        <sec:authorize access="hasAuthority('Coder')">
+        <sec:authorize access="hasAuthority('ROLE_Coder')">
         <a href="/spring-mvc-sec/coder">go to coder page</a>
        </sec:authorize>
         <br>
-        <sec:authorize access="hasAuthority('Trainer')">
+        <sec:authorize access="hasAuthority('ROLE_Trainer')">
         <a href="/spring-mvc-sec/trainer">got to trainer page</a>
         </sec:authorize>
         <br/>

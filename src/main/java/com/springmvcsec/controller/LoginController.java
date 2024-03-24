@@ -44,7 +44,7 @@ public class LoginController {
 
 		System.out.println("after" + singupDTO.toString());
 		
-		UserDetails user = User.withUsername(singupDTO.getUsername()).password(encodedPassword).roles("Coder").build();
+		UserDetails user = User.withUsername(singupDTO.getUsername()).password(encodedPassword).authorities("Coder").build();
 
 		jdbcUserDetailsManager.createUser(user);
 		//singupDAO.saveUser(singupDTO);
