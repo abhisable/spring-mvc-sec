@@ -1,7 +1,10 @@
 package com.springmvcsec.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,6 +18,9 @@ public class LoginController {
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	JdbcUserDetailsManager jdbcUserDetailsManager;
 
 	@Autowired
 	SignupDAO singupDAO;
@@ -25,7 +31,7 @@ public class LoginController {
 	}
 
 	@GetMapping("/signup")
-	public String signup(@ModelAttribute("signupdto") SignupDTO singupDto) {
+	public String signup(@ModelAttribute("signupdto") SignupDTO signupDTO) {
 		return "signup";
 	}
 
@@ -37,8 +43,11 @@ public class LoginController {
 		singupDTO.setPassword(encodedPassword);
 
 		System.out.println("after" + singupDTO.toString());
+		
+		UserDetails user = User.withUsername(singupDTO.getUsername()).password(encodedPassword).roles("Coder").build();
 
-		singupDAO.saveUser(singupDTO);
+		jdbcUserDetailsManager.createUser(user);
+		//singupDAO.saveUser(singupDTO);
 		return "redirect:/myCustomLogin";
 	}
 }
