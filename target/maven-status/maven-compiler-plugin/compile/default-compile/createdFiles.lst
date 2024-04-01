@@ -1,4 +1,5 @@
 com/springmvcsec/config/MySecurityInitializer.class
+com/springmvcsec/DTO/PasswordChangeDTO.class
 com/springmvcsec/controller/HelloWorldController.class
 com/springmvcsec/controller/LoginController.class
 com/springmvcsec/DTO/SignupDTO.class

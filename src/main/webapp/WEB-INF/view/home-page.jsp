@@ -12,11 +12,14 @@
         <a href="/spring-mvc-sec/coder">go to coder page</a>
        </sec:authorize>
         <br>
-        <sec:authorize access="hasAuthority('RTrainer')">
+        <sec:authorize access="hasAuthority('Trainer')">
         <a href="/spring-mvc-sec/trainer">got to trainer page</a>
         </sec:authorize>
         <br/>
        <a href="/spring-mvc-sec/deleteUser?userName=${userName}">delete your details</a>
+       <br>
+       <br>
+       <a href="/spring-mvc-sec/changePassword">change password</a>
        <br>
        <br>
         <form:form action="logout" method="POST">
