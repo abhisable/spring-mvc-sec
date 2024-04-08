@@ -31,6 +31,10 @@ public class SecurityAppConfig {
 
 		JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager();
 		jdbcUserDetailsManager.setDataSource(dataSource);
+		
+//      jdbcUserDetailsManager.setUsersByUsernameQuery("select username,password,enabled from customers where username = ?"); this way we can override all the default schema queries according to our need
+//		jdbcUserDetailsManager.setAuthoritiesByUsernameQuery("select username,roles from customers where username = ?");
+		
 		return jdbcUserDetailsManager;
 
 	}
